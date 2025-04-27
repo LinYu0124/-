@@ -1,6 +1,8 @@
 const boardElement = document.getElementById('board');
 const messageElement = document.getElementById('message');
 const resetButton = document.getElementById('resetButton');
+const modal = document.getElementById('myModal');
+const closeButton = document.querySelector('.close');
 
 let board = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X';
@@ -43,33 +45,37 @@ function handleCellClick(event) {
 // 勝負檢查
 function checkWin() {
     const winningCombinations = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
     ];
-
     return winningCombinations.some(combination => {
         const [a, b, c] = combination;
         return board[a] && board[a] === board[b] && board[b] === board[c];
     });
 }
 
-// 重新開始遊戲
+// 重新開始遊戲並顯示模態視窗
 resetButton.addEventListener('click', () => {
     board = ['', '', '', '', '', '', '', '', ''];
     currentPlayer = 'X';
     gameActive = true;
     initializeBoard();
-
-    // 顯示彈出視窗
-    alert('遊戲已重置！重新開始吧！');
+    
+    modal.style.display = 'block'; // 顯示模態視窗
 });
 
+// 關閉模態視窗
+closeButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
 
 // 初始化遊戲
 initializeBoard();
+
