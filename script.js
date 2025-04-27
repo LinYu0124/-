@@ -65,7 +65,11 @@ resetButton.addEventListener('click', () => {
     currentPlayer = 'X';
     gameActive = true;
     initializeBoard();
+
+    // 顯示彈出視窗
+    alert('遊戲已重置！重新開始吧！');
 });
+
 
 // 初始化遊戲
 initializeBoard();
